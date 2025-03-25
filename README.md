@@ -1,4 +1,4 @@
-# SafeScan-YOLO
+# SafeScan-PPE-Detection-YOLO
 A Protective Personal Equipment (PPE) compliance monitoring system using YOLOv11 and the SH17 dataset.
 
 ## Project Overview
