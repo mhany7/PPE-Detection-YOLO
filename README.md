@@ -60,3 +60,13 @@ SafeScan-YOLO is a deep learning-based solution designed to monitor compliance w
    ```bash
    git clone https://github.com/mhany7/SafeScan-YOLO.git
    cd SafeScan-YOLO
+
+
+## Milestone 1: Data Collection, Preprocessing, and Exploration
+- Loaded and paired 8,099 images and labels from the SH17 dataset.
+- Preprocessed data: resized to 640x640, normalized, and augmented.
+- Performed EDA: visualized samples and class distribution.
+- Noted challenges: Some images are not PPE-related.
+- Outputs: See `milestone1/` for the notebook, plots, and preprocessed samples.
+
+
