@@ -104,6 +104,9 @@ To run the PPE Detection System locally, follow these steps:
 
    Access the interface at `http://localhost:5000`.
 
+5. **Running the web interface on Streamlit cloud**:
+    https://ppe-detection-mvkxswn5kxjddtkjabcyqn.streamlit.app/   
+
 ## Usage
 
 - **Web Interface**: Upload images via the web interface to detect PPE in real-time.
