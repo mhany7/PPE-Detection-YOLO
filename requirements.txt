@@ -1,0 +1,13 @@
+torch==2.5.0
+torchvision==0.20.0
+opencv-python==4.11.0
+numpy==1.26.4
+onnxruntime==1.17.0
+streamlit==1.32.0
+pillow==10.3.0
+ultralytics==8.3.105
+albumentations==1.4.14
+pandas==2.2.3
+matplotlib==3.9.2
+seaborn==0.13.2
+pyyaml==6.0.1

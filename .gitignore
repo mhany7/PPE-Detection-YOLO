@@ -1,0 +1,5 @@
+models/*.onnx
+*.ipynb_checkpoints/
+__pycache__/
+data/sh17/
+venv/

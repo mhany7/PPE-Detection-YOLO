@@ -1,72 +1,67 @@
-# SafeScan-PPE-Detection-YOLO
-A Protective Personal Equipment (PPE) compliance monitoring system using YOLOv11 and the SH17 dataset.
+# Image Classification and Object Detection System - Milestone 01
 
-## Project Overview
-SafeScan-YOLO is a deep learning-based solution designed to monitor compliance with Personal Protective Equipment (PPE) usage in industrial and workplace environments. Leveraging the YOLOv11 object detection model and the SH17 dataset, this system detects PPE items (e.g., helmets, masks, safety vests) in real-time, ensuring safety standards are met. The project spans data preprocessing, model training, optimization, and deployment, with potential integration into cloud platforms like Azure for scalable, real-time applications.
+This milestone focuses on data collection, preprocessing, and exploration for the image classification and object detection system using YOLOv11.
 
-## Objectives
-- Develop an object detection system to identify PPE items in images and video streams.
-- Ensure accurate detection and classification of PPE compliance.
-- Optimize the system for real-time performance in safety-critical settings.
-- Deploy a user-friendly interface for monitoring PPE usage.
+## Features
 
-## Technologies Used
-- **Python**: Core programming language (libraries: PyTorch, OpenCV, NumPy, Pandas, Albumentations).
-- **Deep Learning**: YOLOv11 for object detection.
-- **Dataset**: SH17 Dataset for PPE Detection (8,099 images, 17 classes).
-- **Image Processing**: OpenCV for preprocessing and visualization.
-- **Cloud (Optional)**: Microsoft Azure for deployment and scalability.
-- **GitHub**: Repository management and collaboration.
+- Data Collection: Downloads and prepares the CIFAR-10 dataset
+- Data Preprocessing:
+  - Image resizing to 224x224
+  - Normalization
+  - Data augmentation (random flips, rotations, color jittering)
+- Dataset Splitting: Divides data into training (70%), validation (15%), and test (15%) sets
+- Exploratory Data Analysis:
+  - Sample image visualization
+  - Class distribution analysis
+- YOLOv11 Integration:
+  - Automatic model download
+  - YOLO-compatible data structure preparation
+  - Object detection support
 
-## Team Members & Roles
-| Team Member         | Responsibility                     |
-|---------------------|------------------------------------|
-| Merna Mahfouz       | Data Collection & Preprocessing   |
-| Youssef Samir       | Data Collection & Model Training  |
-| Mohamed Hany        | Model Development & Training      |
-| Mona Youssef        | Object Detection & Evaluation     |
-| Mohamed Atef        | Model Optimization & Tuning       |
+## Setup
 
-## Key Milestones
-1. **Data Collection, Preprocessing, and Exploration**  
-   - Gather and preprocess the SH17 dataset, including resizing, normalization, and augmentation.  
-   - Conduct exploratory data analysis (EDA) to understand class distributions and challenges.
+1. Install the required dependencies:
+```bash
+pip install -r requirements.txt
+```
 
-2. **Model Development & Training**  
-   - Train the YOLOv11 model on the preprocessed SH17 dataset for PPE detection.  
-   - Evaluate performance using metrics like mAP and IoU.
+2. Run the milestone:
+```bash
+python src/milestone_01.py
+```
 
-3. **Advanced Techniques & Optimization**  
-   - Apply transfer learning and hyperparameter tuning to enhance accuracy and speed.  
-   - Optimize for real-time inference.
+## Output
 
-4. **System Deployment & Monitoring**  
-   - Deploy the model as a real-time endpoint (e.g., via Azure or a web interface).  
-   - Implement MLOps practices for continuous monitoring and retraining.
+The script will generate:
+- Sample images visualization in `results/sample_images.png`
+- Class distribution analysis in `results/class_distribution.png`
+- Processed dataset in the `data` directory
+- YOLO-compatible data structure in `data/yolo_data` directory
 
-5. **Documentation & Presentation**  
-   - Compile a final report and presentation showcasing the system’s workflow and results.
+## Data Augmentation Techniques
 
-## Getting Started
-### Prerequisites
-- Python 3.8+
-- PyTorch
-- OpenCV
-- Albumentations
-- Access to the SH17 dataset (available on [Kaggle](https://www.kaggle.com/datasets/mugheesahmad/sh17-dataset-for-ppe-detection))
+The following augmentation techniques are applied:
+- Random horizontal flips
+- Random rotations (±10 degrees)
+- Color jittering (brightness and contrast adjustments)
 
-### Installation
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/mhany7/SafeScan-YOLO.git
-   cd SafeScan-YOLO
+## Directory Structure
 
+```
+.
+├── data/               # Downloaded and processed datasets
+│   └── yolo_data/     # YOLO-compatible data structure
+│       ├── images/    # Training and validation images
+│       └── labels/    # Training and validation labels
+├── results/           # Generated visualizations and analysis
+├── src/               # Source code
+│   └── milestone_01.py
+└── requirements.txt   # Project dependencies
+```
 
-## Milestone 1: Data Collection, Preprocessing, and Exploration
-- Loaded and paired 8,099 images and labels from the SH17 dataset.
-- Preprocessed data: resized to 640x640, normalized, and augmented.
-- Performed EDA: visualized samples and class distribution.
-- Noted challenges: Some images are not PPE-related.
-- Outputs: See `milestone1/` for the notebook, plots, and preprocessed samples.
+## YOLOv11 Integration
 
-
+The code includes support for YOLOv11 object detection:
+- Automatically downloads the YOLOv11 model
+- Creates the required directory structure for YOLO training
+- Prepares data in YOLO-compatible format 

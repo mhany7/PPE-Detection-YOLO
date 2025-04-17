@@ -1,0 +1,24 @@
+path: data/sh17  # dataset root dir
+train: train_files.txt  # relative to 'path'
+val: val_files.txt  # relative to 'path'
+test:  # optional, add test_files.txt if available
+
+# Classes (confirmed correct)
+names:
+  0: person
+  1: ear
+  2: ear-mufs
+  3: face
+  4: face-guard
+  5: face-mask
+  6: foot
+  7: tool
+  8: glasses
+  9: gloves
+  10: helmet
+  11: hands
+  12: head
+  13: medical-suit
+  14: shoes
+  15: safety-suit
+  16: safety-vest
