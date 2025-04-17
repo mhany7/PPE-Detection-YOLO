@@ -1,5 +1,0 @@
-
-train: /kaggle/working/yolo_dataset/train
-val: /kaggle/working/yolo_dataset/val
-nc: 17
-names: ['Helmet', 'Mask', 'Safety Vest', 'Gloves', 'Safety Glasses', 'Boots', 'Ear Protection', 'Harness', 'Coveralls', 'Respirator', 'Hard Hat', 'Face Shield', 'Safety Belt', 'Knee Pads', 'Reflective Tape', 'Goggles', 'Other PPE']
