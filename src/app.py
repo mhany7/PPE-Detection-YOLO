@@ -12,16 +12,16 @@ model_path = "model.pt"
 
 model = YOLO("model.pt")  
 
-# Load YAML configuration (optional)
-#def load_yaml_config(config_file):
-#    with open(config_file, "r") as file:
-#        config = yaml.safe_load(file)
-#    return config
+#Load YAML configuration (optional)
+def load_yaml_config(config_file):
+    with open(config_file, "r") as file:
+        config = yaml.safe_load(file)
+    return config
 
 # Example: Load configuration
-#config = load_yaml_config('config.yaml')
-#st.write(f"Model Name: {config['model']['name']}")
-#st.write(f"Categories: {config['model']['categories']}")
+config = load_yaml_config('data.yaml')
+st.write(f"Model Name: {config['model']['name']}")
+st.write(f"Categories: {config['model']['categories']}")
 
 import torch
 
