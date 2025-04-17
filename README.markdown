@@ -10,8 +10,7 @@ The project follows a structured pipeline, including data collection, preprocess
 
 ## Team Roles
 
-- **Data Collection and Loading**: Mohamed Hany
-- **Data Preprocessing**: Mohamed Hany
+- **Data Collection and Preprocessing**: Mohamed Hany
 - **Model Training and Fine-Tuning**: Youssef Samir
 - **Model Deployment**: Merna Mahfouz
 - **Final Presentation**: Mohamed Hany
