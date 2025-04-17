@@ -6,12 +6,22 @@ import onnxruntime as ort
 import cv2
 import yaml
 from ultralytics import YOLO
+import os
+import gdown
 
 # Paths
+MODEL_PT_URL = "https://drive.google.com/uc?id=1fv6MIxZSYeFi3zHbsg5GgzPQEzOLk2YA"
+MODEL_ONNX_URL = "https://drive.google.com/uc?id=1DV6s9FsK2UvRokOzmh1zD3WD2E3214bq"
 MODEL_PT_PATH = "models/model.pt"
 MODEL_ONNX_PATH = "models/model.onnx"
 YAML_PATH = "data/data.yaml"
-IMG_SIZE = (640, 640)  # Consistent with training/validation
+IMG_SIZE = (416,416)  # Consistent with training/validation
+
+# Download models if not present
+if not os.path.exists(MODEL_PT_PATH):
+    gdown.download(MODEL_PT_URL, MODEL_PT_PATH, quiet=False)
+if not os.path.exists(MODEL_ONNX_PATH):
+    gdown.download(MODEL_ONNX_URL, MODEL_ONNX_PATH, quiet=False)
 
 # Load YAML for class names
 def load_yaml_config(config_file):
@@ -66,26 +76,23 @@ def predict_pytorch(model, image):
 def predict_onnx(session, input_name, image, class_names, conf_thres=0.25, iou_thres=0.45):
     try:
         outputs = session.run(None, {input_name: image})
-        # YOLO ONNX outputs: [boxes, scores, classes]
-        # Ultralytics YOLOv8 ONNX typically outputs [1, num_boxes, 4+num_classes]
         output = outputs[0]  # Shape: [1, num_boxes, 4+17]
         boxes = output[0, :, :4]  # x1, y1, x2, y2
         scores = output[0, :, 4:4+len(class_names)]  # Class probabilities
         conf_scores = np.max(scores, axis=1)  # Max confidence per box
         class_ids = np.argmax(scores, axis=1)  # Predicted class IDs
 
-        # Apply confidence and NMS (simplified)
+        # Apply confidence and NMS
         mask = conf_scores > conf_thres
         boxes = boxes[mask]
         conf_scores = conf_scores[mask]
         class_ids = class_ids[mask]
 
-        # Simplified NMS (using OpenCV)
         indices = cv2.dnn.NMSBoxes(
             boxes.tolist(), conf_scores.tolist(), conf_thres, iou_thres
         )
         if isinstance(indices, tuple):
-            indices = indices[0]  # Handle tuple output
+            indices = indices[0]
         summary = []
         for idx in indices:
             label = class_names.get(class_ids[idx], f"Class {class_ids[idx]}")
@@ -128,7 +135,7 @@ uploaded_image = st.file_uploader("Choose an image...", type=["jpg", "jpeg", "pn
 
 if uploaded_image is not None:
     image = Image.open(uploaded_image)
-    st.image(image, caption="Uploaded Image", use_column_width=True)
+    st.image(image, caption="Uploaded Image", use_container_width=True)
 
     # Model selection
     model_choice = st.selectbox("Select Model", ["PyTorch", "ONNX"])
@@ -139,7 +146,7 @@ if uploaded_image is not None:
             results = predict_pytorch(model, image)
             if results:
                 annotated_image = results.plot()
-                st.image(annotated_image, caption="Detection Result", use_column_width=True)
+                st.image(annotated_image, caption="Detection Result", use_container_width=True)
                 detection_data = get_detection_summary(results, class_names)
                 if detection_data:
                     st.subheader("Detected PPE Items")
@@ -157,6 +164,6 @@ if uploaded_image is not None:
                 st.table(summary)
                 if boxes is not None:
                     annotated_image = draw_onnx_boxes(image, boxes, class_ids, conf_scores, class_names)
-                    st.image(annotated_image, caption="Detection Result", use_column_width=True)
+                    st.image(annotated_image, caption="Detection Result", use_container_width=True)
             else:
-                st.warning("No PPE items detected.")
+                st.warning("No PPE items detected. or check Image Size")

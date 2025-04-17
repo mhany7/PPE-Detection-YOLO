@@ -1,3 +1,4 @@
+models/*.pt
 models/*.onnx
 *.ipynb_checkpoints/
 __pycache__/
